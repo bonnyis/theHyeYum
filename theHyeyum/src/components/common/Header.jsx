@@ -1,7 +1,35 @@
 import logoImg from "@img/test2.png"
 import { Link } from 'react-router-dom'
 const Header = () => {
-
+  const menuList = [
+    { mainName: 'info',
+      list: [
+        {name: 'CEO 인사말', path: '/greetings'},
+        {name: '기업소개', path: '/info'},
+        {name: '연혁', path: '/history'},
+        {name: '오시는길', path: '/direction'},
+      ]
+    },
+    { mainName: 'product',
+      list: [
+        {name: '테이블(모양지)', path: '/product1'},
+        {name: '철재', path: '/product2'},
+        {name: '집기류', path: '/product3'},
+      ]
+    },
+    { mainName: 'designLab',
+      list: [
+        {name: '제품디자인연구소', path: '/designLab'},
+      ]
+    },
+    { mainName: 'community',
+      list: [
+        {name: '공지사항', path: '/notice'},
+        {name: '적용사례', path: '/example'},
+        {name: '제품견적문의', path: '/question'},
+      ]
+    },
+  ]
   return (
     <>
     <div className="h-20 w-full flex items-center  mainnav my-3">
@@ -22,26 +50,18 @@ const Header = () => {
     </div>
     <div className="sub absolute top-20 right-0 w-4/5 h-56 z-50">
       <div className="subnav flex">
-          <ul className="">
-              <li><Link to={''}>CEO 인사말</Link></li>
-              <li><Link to={''}>기업소개</Link></li>
-              <li><Link to={''}>연혁</Link></li>
-              <li><Link to={''}>오시는 길</Link></li>
-          </ul>
-          <ul className="">
-              <li><Link to={''}>테이블(모양지)</Link></li>
-              <li><Link to={''}>철재</Link></li>
-              <li><Link to={''}>집기류</Link></li>
+        {
+          menuList?.map((section,indx)=> (
+            <ul key={`menu + ${indx +1}`}>
+              {
+                section.list?.map(link => (
+                  <li key={link.path}><Link to={link.path}>{link.name}</Link></li>
+                ))
+              }
             </ul>
-            <ul className="">
-              <li><Link to={''}>제품디자인연구소</Link></li>
-            </ul>
-            <ul className="">
-              <li><Link to={''}>공지사항</Link></li>
-              <li><Link to={''}>적용사례</Link></li>
-              <li><Link to={''}>제품견적문의</Link></li>
-            </ul>
-            </div>
+          ))
+        }
+        </div>
       </div>
       </>
 
