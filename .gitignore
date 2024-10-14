@@ -1,0 +1,7 @@
+# 환경 설정 파일 무시
+.env        # 환경 변수 파일
+# Node.js 관련 파일 무시 (예시)
+node_modules/
+# IDE나 편집기 관련 파일 무시
+.vscode/
+.idea/

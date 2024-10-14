@@ -1,0 +1,18 @@
+.sub {
+  display: none;
+}
+.mainnav:not(img):hover + .sub,
+.sub:hover {
+  display: block;
+}
+.subnav > ul {
+  text-align: center;
+  width: 25%;
+}
+.subnav > ul li > a:hover {
+  text-decoration: underline #d7ccc8 2.5px;
+}
+.subnav > ul li > a {
+  display: inline-block;
+  padding: 15px;
+}
