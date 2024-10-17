@@ -16,3 +16,14 @@
   display: inline-block;
   padding: 15px;
 }
+.block {
+  display: block;
+}
+.none {
+  display: none;
+}
+.menu_background {
+  position: absolute;
+  width: inherit;
+  height: 270px;
+}

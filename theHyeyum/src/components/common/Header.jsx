@@ -1,6 +1,15 @@
 import logoImg from "@img/test2.png"
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 const Header = () => {
+  const [mobileYn, setMobileYn] = useState(false);
+
+  const titleMenu = [
+    {main: 'info', name: '회사소개'},
+    {main: 'product', name: '제품소개'},
+    {main: 'designLab', name: '연구개발'},
+    {main: 'community', name: '커뮤니티'},
+  ]
   const menuList = [
     { mainName: 'info',
       list: [
@@ -30,25 +39,33 @@ const Header = () => {
       ]
     },
   ]
+  const changemob = () => {
+    setMobileYn(!mobileYn);
+    console.log(mobileYn)
+    const target = document.querySelector('.sub');
+    console.log(target.classList)
+    if(target && target?.classList) {
+      target.classList.forEach(list => list.includes('block') ?   target.classList.remove('block') : target.classList.add('block'))
+      console.log('!!!');
+    }
+  }
   return (
     <>
-    <div className="h-20 w-full flex items-center  mainnav my-3">
-      <div className="imgBox w-1/5 pl-10 text-center">
+    <div className="h-20 w-full md:flex-row flex-col flex items-center mainnav my-3">
+      <div className="md:pl-10 pl-0 md:w-1/5 w-auto text-center">
         <img src={logoImg} alt="로고" className="h-12"/>
       </div>
 
-      <ul className="w-4/5 flex items-center relative text-center h-auto real">
-          <li className='w-1/4'><Link to={'/info'}>회사소개</Link>
-           </li>
-           <li className='w-1/4'><Link to={''}>제품소개</Link>
-           </li>
-           <li className='w-1/4'><Link to={''}>연구개발</Link>
-           </li>
-           <li className='w-1/4'><Link to={''}>커뮤니티</Link>
-           </li>
+      <ul className="w-4/5 flex md:mt-0 mt-5 items-center relative text-center h-auto real font-semibold">
+      {
+        titleMenu?.map(item => (
+          <li key={item.main} onClick={()=> changemob()} className={'w-1/4'}>{item.name}</li>
+        ))
+      }
       </ul>
     </div>
-    <div className="sub absolute top-20 right-0 w-4/5 h-56 z-50">
+    <div className='menu_background bg-defaultColor' style={{display: mobileYn ?' block': 'none'}}></div>
+    <div className="sub absolute w-4/5 h-56 z-50 top-24 right-0 min-[320px]:left-8 min-[560px]:left-10">
       <div className="subnav flex">
         {
           menuList?.map((section,indx)=> (
