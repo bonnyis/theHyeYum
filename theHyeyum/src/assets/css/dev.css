@@ -1,3 +1,7 @@
+html {
+  background-color: #f8f9fa;
+}
+
 .sub {
   display: none;
 }
@@ -26,4 +30,9 @@
   position: absolute;
   width: inherit;
   height: 270px;
+}
+.vertical-m {
+  display: flex;
+  position: relative;
+  align-items: center;
 }

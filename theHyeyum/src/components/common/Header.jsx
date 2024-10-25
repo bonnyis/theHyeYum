@@ -1,9 +1,28 @@
 import logoImg from "@img/test2.png"
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
+import useResize from '@/utils/useResize.js'
+const MbHeader = () => {
+  return(
+    <div id="menu-icon" className="block cursor-pointer w-14">
+      <div className="w-6 h-1 bg-white mb-1 transition-transform bg-logoColor"></div>
+      <div className="w-6 h-1 bg-white mb-1 transition-transform bg-logoColor"></div>
+      <div className="w-6 h-1 bg-white transition-transform bg-logoColor"></div>
+    </div>
+  
+  )
+}
 const Header = () => {
+  const { deviceType, activeResize} =  useResize();
+
   const [mobileYn, setMobileYn] = useState(false);
 
+
+  useEffect(() => {
+    activeResize();
+    console.log(deviceType)
+  }, [window.innerWidth])
+  
   const titleMenu = [
     {main: 'info', name: '회사소개'},
     {main: 'product', name: '제품소개'},
@@ -41,9 +60,7 @@ const Header = () => {
   ]
   const changemob = () => {
     setMobileYn(!mobileYn);
-    console.log(mobileYn)
     const target = document.querySelector('.sub');
-    console.log(target.classList)
     if(target && target?.classList) {
       target.classList.forEach(list => list.includes('block') ?   target.classList.remove('block') : target.classList.add('block'))
       console.log('!!!');
@@ -51,35 +68,43 @@ const Header = () => {
   }
   return (
     <>
-    <div className="h-20 w-full md:flex-row flex-col flex items-center mainnav my-3">
-      <div className="md:pl-10 pl-0 md:w-1/5 w-auto text-center">
+    <div className="h-20 w-full flex justify-between items-center mainnav my-3">
+      <div className="md:pl-10 pl-5 md:w-1/5 w-36 text-center">
         <img src={logoImg} alt="로고" className="h-12"/>
       </div>
-
-      <ul className="w-4/5 flex md:mt-0 mt-5 items-center relative text-center h-auto real font-semibold">
+    {
+       deviceType === 'MOBILE' ?  <MbHeader/> : 
+       <ul className="w-4/5 flex md:mt-0 mt-5 items-center relative text-center h-auto real font-semibold">
       {
         titleMenu?.map(item => (
           <li key={item.main} onClick={()=> changemob()} className={'w-1/4'}>{item.name}</li>
         ))
       }
       </ul>
+    }
+      
     </div>
-    <div className='menu_background bg-defaultColor' style={{display: mobileYn ?' block': 'none'}}></div>
-    <div className="sub absolute w-4/5 h-56 z-50 top-24 right-0 min-[320px]:left-8 min-[560px]:left-10">
-      <div className="subnav flex">
-        {
-          menuList?.map((section,indx)=> (
-            <ul key={`menu + ${indx +1}`}>
-              {
-                section.list?.map(link => (
-                  <li key={link.path}><Link to={link.path}>{link.name}</Link></li>
-                ))
-              }
-            </ul>
-          ))
-        }
+    {
+      deviceType === 'MOBILE' ?  <></> : 
+      <>
+      <div className='menu_background bg-defaultColor'></div>
+      <div className="sub absolute w-4/5 h-56 z-50 top-24 right-0 min-[320px]:left-8 min-[560px]:left-10">
+        <div className="subnav flex">
+          {
+            menuList?.map((section,indx)=> (
+              <ul key={`menu + ${indx +1}`}>
+                {
+                  section.list?.map(link => (
+                    <li key={link.path}><Link to={link.path}>{link.name}</Link></li>
+                  ))
+                }
+              </ul>
+            ))
+          }
+          </div>
         </div>
-      </div>
+        </>
+    }
       </>
 
 

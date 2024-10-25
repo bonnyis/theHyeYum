@@ -12,14 +12,15 @@ const DefaultLayout = () => {
 
   return (
     <div className="bg-defaultColor">
-    <div className="h-screen w-screen md:w-auto mx-auto font-Interop max-w-screen-xl font-normal relative ">
+    <div className="h-lvh w-screen md:w-auto mx-auto font-Interop max-w-screen-xl font-normal relative ">
       <Header />
         <section className="px-9">
         <SubHeader />
         <Outlet />
         </section>
-      <Footer />
+ 
   </div>
+  <Footer />
   </div>
   )
 }
