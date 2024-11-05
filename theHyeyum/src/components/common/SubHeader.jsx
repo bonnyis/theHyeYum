@@ -11,8 +11,14 @@ const SubHeader = () => {
                 return setTitle('공지사항')
             case '/info':
                 return setTitle('기업소개')
+            case '/greetings':
+                return setTitle('CEO 인사말')
+            case '/history':
+                return setTitle('연혁')
+            case '/direction':
+                return setTitle('오시는 길')
             default:
-            return;
+            return setTitle('')
         }
     }
     useEffect(() => {

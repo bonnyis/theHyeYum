@@ -2,6 +2,41 @@ import logoImg from "@img/test2.png"
 import { Link } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import useResize from '@/utils/useResize.js'
+const menuList = [
+  { mainName: '기업소개',
+    mainPath: 'info',
+    list: [
+      {name: 'CEO 인사말', path: '/greetings'},
+      {name: '기업소개', path: '/info'},
+      {name: '연혁', path: '/history'},
+      {name: '오시는길', path: '/direction'},
+    ]
+  },
+  { 
+    mainName: '제품소개',
+    mainPath: 'product',
+    list: [
+      {name: '테이블(모양지)', path: '/product1'},
+      {name: '철재', path: '/product2'},
+      {name: '집기류', path: '/product3'},
+    ]
+  },
+  { 
+    mainPath: 'designLab',
+    mainName: '연구개발',
+    list: [
+      {name: '제품디자인연구소', path: '/designLab'},
+    ]
+  },
+  { mainName: '커뮤니티',
+    mainPath: 'community',
+    list: [
+      {name: '공지사항', path: '/notice'},
+      {name: '적용사례', path: '/example'},
+      {name: '제품견적문의', path: '/question'},
+    ]
+  },
+]
 const MbHeader = () => {
   return(
     <div id="menu-icon" className="block cursor-pointer w-14">
@@ -12,6 +47,32 @@ const MbHeader = () => {
   
   )
 }
+const MbHeaderMenu = () => {
+  return(
+    <div className="bg-defaultColor absolute right-0">
+       <div className="flex flex-col w-60">
+          {
+            menuList && menuList?.map((section,indx)=> (
+              <ul key={`menu + ${indx +1}`}>
+                <li>
+                  {section.mainName}
+                <ul >
+                {
+                  section.list?.map(link => (
+                    <li key={link.path}><Link to={link.path}>{link.name}</Link></li>
+                  ))
+                }
+              </ul>
+                </li>
+              </ul>
+           
+            ))
+          }
+          </div>
+    </div>
+  )
+  
+}
 const Header = () => {
   const { deviceType, activeResize} =  useResize();
 
@@ -20,7 +81,6 @@ const Header = () => {
 
   useEffect(() => {
     activeResize();
-    console.log(deviceType)
   }, [window.innerWidth])
   
   const titleMenu = [
@@ -29,41 +89,12 @@ const Header = () => {
     {main: 'designLab', name: '연구개발'},
     {main: 'community', name: '커뮤니티'},
   ]
-  const menuList = [
-    { mainName: 'info',
-      list: [
-        {name: 'CEO 인사말', path: '/greetings'},
-        {name: '기업소개', path: '/info'},
-        {name: '연혁', path: '/history'},
-        {name: '오시는길', path: '/direction'},
-      ]
-    },
-    { mainName: 'product',
-      list: [
-        {name: '테이블(모양지)', path: '/product1'},
-        {name: '철재', path: '/product2'},
-        {name: '집기류', path: '/product3'},
-      ]
-    },
-    { mainName: 'designLab',
-      list: [
-        {name: '제품디자인연구소', path: '/designLab'},
-      ]
-    },
-    { mainName: 'community',
-      list: [
-        {name: '공지사항', path: '/notice'},
-        {name: '적용사례', path: '/example'},
-        {name: '제품견적문의', path: '/question'},
-      ]
-    },
-  ]
+
   const changemob = () => {
     setMobileYn(!mobileYn);
     const target = document.querySelector('.sub');
     if(target && target?.classList) {
       target.classList.forEach(list => list.includes('block') ?   target.classList.remove('block') : target.classList.add('block'))
-      console.log('!!!');
     }
   }
   return (
@@ -85,7 +116,7 @@ const Header = () => {
       
     </div>
     {
-      deviceType === 'MOBILE' ?  <></> : 
+      deviceType === 'MOBILE' ?  <MbHeaderMenu menuList={menuList} />: 
       <>
       <div className='menu_background bg-defaultColor'></div>
       <div className="sub absolute w-4/5 h-56 z-50 top-24 right-0 min-[320px]:left-8 min-[560px]:left-10">

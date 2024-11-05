@@ -8,6 +8,7 @@ import NoticeList from "@/views/community/NoticeList.jsx"
 import DirectionMap from  "@/views/infomation/DirectionMap.jsx"
 import Greetings from  "@/views/infomation/Greetings.jsx"
 import History from  "@/views/infomation/History.jsx"
+import NotFound from "@/views/NotFound.jsx"
 const DefaultLayout = () => {
 
   return (
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/direction" element={<DirectionMap />} /> 
         {/* 커뮤니티 */}
         <Route path='/notice' element={<NoticeList />}/>
+        <Route path={"*"} element={<NotFound />}/>
       </Route>
 
     </Routes>
