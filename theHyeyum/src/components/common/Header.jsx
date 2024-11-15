@@ -54,7 +54,7 @@ const MbHeader = ({ mobileYn, setMobileYn }) => {
 // 모바일용 메뉴리스트
 const MbHeaderMenu = () => {
   return(
-    <div className="bg-logoColor absolute right-0 text-defaultColor p-5 rounded-md top-20 h-full bg-white shadow-lg transform transition-transform duration-300">
+    <div className="bg-logoColor absolute right-0 text-defaultColor p-5 rounded-md top-20 h-full bg-white shadow-lg transform transition-transform duration-300 z-50">
        <div className="flex flex-col w-52">
           {
             menuList && menuList?.map((section,indx)=> (
