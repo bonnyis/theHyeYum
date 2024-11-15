@@ -8,9 +8,10 @@ const Footer = () => {
               <img src={footerLogo} alt="blackLogo" className="w-32 opacity-50" />
             </div>
             <ul className="ml-5"> 
-            <li>주소: <span>경기 김포시 대곶면 대곶북로 351-26 (경기 김포시 대곶면 석정리 48-21)</span></li>
-            <li>대표번호: 031-997-2738</li>
-            {/* <li className="text-center">Copyright© TheHyeYum. All Rights Reserve</li> */}
+            <li>주소: <span> 경기 김포시 대곶면 옹정로17번길 11</span></li>
+            <li>대표번호: 010-2589-9018</li>
+            <li>팩스 : 031-988-6535</li>
+            <li>이메일 : theyum21@naver.com </li>
           </ul>
      
         </div>

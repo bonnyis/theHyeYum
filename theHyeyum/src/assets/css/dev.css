@@ -1,7 +1,6 @@
 html {
   background-color: #f8f9fa;
 }
-
 .sub {
   display: none;
 }
@@ -29,10 +28,18 @@ html {
 .menu_background {
   position: absolute;
   width: inherit;
-  height: 270px;
+  /* height: 270px; */
 }
 .vertical-m {
   display: flex;
   position: relative;
   align-items: center;
+}
+
+.greetings ul li,
+.infomation ul li {
+  line-height: 2.25rem;
+}
+.slide-item {
+  padding: 50px;
 }

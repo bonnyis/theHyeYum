@@ -13,9 +13,9 @@ const DefaultLayout = () => {
 
   return (
     <div className="bg-defaultColor">
-    <div className="h-lvh w-screen md:w-auto mx-auto font-Interop max-w-screen-xl font-normal relative ">
+    <div className="w-screen md:w-auto mx-auto font-Interop max-w-screen-xl font-normal relative ">
       <Header />
-        <section className="px-9">
+        <section className="px-9 min-h-lvh">
         <SubHeader />
         <Outlet />
         </section>
