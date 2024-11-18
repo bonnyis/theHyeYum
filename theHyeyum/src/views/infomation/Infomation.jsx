@@ -1,7 +1,9 @@
 import { Swiper, SwiperSlide  } from 'swiper/react'
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination, EffectFade, Thumbs, FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation'
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 import certify1 from "@img/certification_4.jpg"
 import certify2 from "@img/certification_2.jpg"
 import certify3 from "@img/certification_3.jpg"
@@ -15,16 +17,21 @@ const Infomation = () => {
         <li>대표자 : 최보람</li>
         <li>설립일 : 2021년 12월</li>
         <li>주요업무 : MDF, HPL, LPM, 집성목, 합판, 목재가공, 포장, 업소용 철제다리, 선반 외 주문제작 가구</li>
+        <li>기업 인증서</li>
       </ul>
       <div>
-        <strong>인증서</strong>
+        {/* <strong>인증서</strong> */}
       <Swiper 
           slidesPerView={1}
           navigation
-          modules={[Navigation]}
+          effect={'fade'}
+          modules={[Navigation, Pagination, EffectFade]}
+          pagination={{
+            type: 'fraction',
+          }}
       >
           <SwiperSlide  className="text-center">
-            <div className="slide-item">
+            <div className="slide-item pt-0">
               <img src={certify1} alt="" className="inline-block" />
             </div>
           </SwiperSlide>
@@ -37,12 +44,12 @@ const Infomation = () => {
           <SwiperSlide>
             <div className="slide-item"><img src={certify4} alt="" /></div>
           </SwiperSlide>
-
       </Swiper>
       <div className="custom-buttons">
         <button className="custom-prev bg-gray-200 p-2 text-gray"></button>
         <button className="custom-next bg-gray-200 p-2"></button>
       </div>
+      
       </div>
     </div>
   )

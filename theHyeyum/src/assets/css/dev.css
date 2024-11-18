@@ -43,3 +43,44 @@ html {
 .slide-item {
   padding: 50px;
 }
+.swiper-button-prev,
+.swiper-button-next {
+  color: #556b2f !important;
+}
+.swiper-button-prev::before,
+.swiper-button-next::after {
+  border-color: #556b2f !important;
+}
+.history-grid {
+  position: relative;
+}
+.history-grid .year {
+  font-size: 23px;
+  position: relative;
+  width: 140px;
+}
+
+.history-grid .year::after {
+  position: absolute;
+  content: "";
+  border: 6px solid #556b2f;
+  background: #fff;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  top: 5px;
+  left: 126px;
+  z-index: 3;
+}
+.history-grid ul {
+  width: calc(100% - 160px);
+}
+.history-grid::after {
+  position: absolute;
+  content: "";
+  width: 3px;
+  height: calc(100% - 30px);
+  background: #556b2f;
+  top: 5px;
+  left: 130px;
+}

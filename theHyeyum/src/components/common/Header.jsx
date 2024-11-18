@@ -1,53 +1,17 @@
 /* eslint-disable react/prop-types */
 import logoImg from "@img/test2.png"
 import { Link } from 'react-router-dom'
-import { useState,useEffect } from 'react'
+import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import useResize from '@/utils/useResize.js'
 import { useSelector, useDispatch } from 'react-redux';
 import {setVisualMbMenu } from "@/store/common/thunkFunctions"
-// 공통 메뉴리스트
-const menuList = [
-  { mainName: '기업소개',
-    mainPath: 'info',
-    list: [
-      {name: 'CEO 인사말', path: '/greetings'},
-      {name: '기업소개', path: '/info'},
-      {name: '연혁', path: '/history'},
-      {name: '오시는길', path: '/direction'},
-    ]
-  },
-  { 
-    mainName: '제품소개',
-    mainPath: 'product',
-    list: [
-      {name: '테이블(모양지)', path: '/product1'},
-      {name: '철재', path: '/product2'},
-      {name: '집기류', path: '/product3'},
-    ]
-  },
-  { 
-    mainPath: 'designLab',
-    mainName: '연구개발',
-    list: [
-      {name: '제품디자인연구소', path: '/designLab'},
-    ]
-  },
-  { mainName: '커뮤니티',
-    mainPath: 'community',
-    list: [
-      {name: '공지사항', path: '/notice'},
-      {name: '적용사례', path: '/example'},
-      {name: '제품견적문의', path: '/question'},
-    ]
-  },
-]
+import menuList from '@/utils/menuList'
 // 모바일용 헤더 
 const MbHeader = () => {
   const dispatch = useDispatch();
   const visualMbMenu = useSelector(state => state.common.visualMbMenu);
   const setViewMbMenu = () => {
-    console.log('???')
     dispatch(setVisualMbMenu(!visualMbMenu))
   }
   return(
@@ -58,6 +22,7 @@ const MbHeader = () => {
     </div>
   )
 }
+
 // 모바일용 메뉴리스트
 const MbHeaderMenu = () => {
   const dispatch = useDispatch();
@@ -66,17 +31,18 @@ const MbHeaderMenu = () => {
     dispatch(setVisualMbMenu(!visualMbMenu))
   }
   return(
-    <div className={`bg-logoColor absolute right-0 text-defaultColor p-5 rounded-l-lg top-0 h-full bg-white shadow-lg transform  transition-transform duration-150 ${visualMbMenu ? 'translate-x-0' :'translate-x-full'} z-50`}>
-      <div className="flex flex-col items-end mr-3" onClick={()=> setViewMbMenu(!visualMbMenu)}>
-        <div className="w-6 h-1 bg-white mb-1 transition duration-100 ease-linear rotate-45 bg-defaultColor"></div>
-        <div className="w-6 h-1 bg-white mb-1 transition-all bg-defaultColor opacity-0"></div>
-        <div className="w-6 h-1 bg-white mb-1 transition-transform bg-defaultColor -rotate-45 top-3"></div>
+    <div className={`bg-logoColor text-defaultColor absolute right-0 top-0 h-full p-5 rounded-l-lg z-50`}>
+      <div className="flex flex-col items-end mr-2 mt-2" onClick={()=> setViewMbMenu(!visualMbMenu)}>
+        <div className="w-6 h-1 mb-1 transition-all
+        rotate-45 translate-y-2 bg-defaultColor right-0"></div>
+        <div className={"w-6 h-1 bg-white mb-1 opacity-0 bg-defaultColor right-0"}></div>
+        <div className="w-6 h-1  mb-1 transition-all  bg-defaultColor -rotate-45 -translate-y-2 right-0"></div>
       </div>
        <div className="flex flex-col w-52">
           {
             menuList && menuList?.map((section,indx)=> (
               <ul key={`menu + ${indx +1}`}>
-                <li className="">
+                <li className="hover:animate-color">
                  <span  className="font-bold"> {section.mainName}</span>
                 <ul className="ml-5 my-2">
                 {
@@ -96,10 +62,10 @@ const MbHeaderMenu = () => {
   
 }
 const Header = () => {
-  const { deviceType, activeResize} =  useResize();
+  const dispatch = useDispatch();
+  const { deviceType, activeResize, isMobile} =  useResize();
   const location = useLocation()
   const visualMbMenu = useSelector(state => state.common.visualMbMenu);
-  const [mobileYn, setMobileYn] = useState(false);
 
   useEffect(() => {
     activeResize();
@@ -107,7 +73,7 @@ const Header = () => {
   useEffect(() => {
     // 페이지 전환 시 메뉴바 닫기
     if(deviceType === 'MOBILE') {
-      setMobileYn(false)
+      dispatch(setVisualMbMenu(false))
     }
   }, [location])
   
@@ -119,7 +85,7 @@ const Header = () => {
   ]
 
   const changemob = () => {
-    setMobileYn(!mobileYn);
+    dispatch(setVisualMbMenu(false))
     const target = document.querySelector('.sub');
     if(target && target?.classList) {
       target.classList.forEach(list => list.includes('block') ?   target.classList.remove('block') : target.classList.add('block'))
@@ -127,7 +93,7 @@ const Header = () => {
   }
   return (
     <>
-    <div className={`h-20 w-full flex justify-between items-center mainnav my-3 ${mobileYn ? 'shadow-sm' : ''}`}>
+    <div className={`h-20 w-full flex justify-between items-center mainnav mb-3 ${isMobile ? 'shadow-sm' : ''}`}>
       <div className="md:pl-10 pl-5 md:w-1/5 w-36 text-center">
         <img src={logoImg} alt="로고" className="h-12"/>
       </div>
@@ -144,7 +110,7 @@ const Header = () => {
       
     </div>
     {
-      deviceType === 'MOBILE' && visualMbMenu ?  <MbHeaderMenu menuList={menuList} />: 
+      isMobile && visualMbMenu ?  <MbHeaderMenu />: 
       <>
       <div className='menu_background bg-defaultColor'></div>
       <div className="sub absolute w-4/5 h-56 z-50 top-24 right-0 min-[320px]:left-8 min-[560px]:left-10">
