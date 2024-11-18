@@ -2,10 +2,10 @@ import { Swiper, SwiperSlide  } from 'swiper/react'
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation'
-import recept1 from "@img/certification_4.jpg"
-import recept2 from "@img/certification_2.jpg"
-import recept3 from "@img/certification_3.jpg"
-import recept4 from "@img/certification_5.jpg"
+import certify1 from "@img/certification_4.jpg"
+import certify2 from "@img/certification_2.jpg"
+import certify3 from "@img/certification_3.jpg"
+import certify4 from "@img/certification_5.jpg"
 
 const Infomation = () => {
   return (
@@ -25,17 +25,17 @@ const Infomation = () => {
       >
           <SwiperSlide  className="text-center">
             <div className="slide-item">
-              <img src={recept1} alt="" className="inline-block" />
+              <img src={certify1} alt="" className="inline-block" />
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="slide-item"><img src={recept2} alt="" /></div>
+            <div className="slide-item"><img src={certify2} alt="" /></div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="slide-item"><img src={recept3} alt="" /></div>
+            <div className="slide-item"><img src={certify3} alt="" /></div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="slide-item"><img src={recept4} alt="" /></div>
+            <div className="slide-item"><img src={certify4} alt="" /></div>
           </SwiperSlide>
 
       </Swiper>

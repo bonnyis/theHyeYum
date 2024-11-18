@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import useResize from '@/utils/useResize.js'
+import { useSelector, useDispatch } from 'react-redux';
+import {setVisualMbMenu } from "@/store/common/thunkFunctions"
+// 공통 메뉴리스트
 const menuList = [
   { mainName: '기업소개',
     mainPath: 'info',
@@ -40,21 +43,35 @@ const menuList = [
   },
 ]
 // 모바일용 헤더 
-const MbHeader = ({ mobileYn, setMobileYn }) => {
-
+const MbHeader = () => {
+  const dispatch = useDispatch();
+  const visualMbMenu = useSelector(state => state.common.visualMbMenu);
+  const setViewMbMenu = () => {
+    console.log('???')
+    dispatch(setVisualMbMenu(!visualMbMenu))
+  }
   return(
-    <div id="menu-icon" className="block cursor-pointer w-14" onClick={()=> setMobileYn(!mobileYn)}>
+    <div id="menu-icon" className="block cursor-pointer w-14" onClick={()=> setViewMbMenu(!visualMbMenu)}>
       <div className="w-6 h-1 bg-white mb-1 transition-transform bg-logoColor"></div>
       <div className="w-6 h-1 bg-white mb-1 transition-transform bg-logoColor"></div>
       <div className="w-6 h-1 bg-white transition-transform bg-logoColor"></div>
     </div>
-  
   )
 }
 // 모바일용 메뉴리스트
 const MbHeaderMenu = () => {
+  const dispatch = useDispatch();
+  const visualMbMenu = useSelector(state => state.common.visualMbMenu);
+  const setViewMbMenu = () => {
+    dispatch(setVisualMbMenu(!visualMbMenu))
+  }
   return(
-    <div className="bg-logoColor absolute right-0 text-defaultColor p-5 rounded-md top-20 h-full bg-white shadow-lg transform transition-transform duration-300 z-50">
+    <div className={`bg-logoColor absolute right-0 text-defaultColor p-5 rounded-l-lg top-0 h-full bg-white shadow-lg transform  transition-transform duration-150 ${visualMbMenu ? 'translate-x-0' :'translate-x-full'} z-50`}>
+      <div className="flex flex-col items-end mr-3" onClick={()=> setViewMbMenu(!visualMbMenu)}>
+        <div className="w-6 h-1 bg-white mb-1 transition duration-100 ease-linear rotate-45 bg-defaultColor"></div>
+        <div className="w-6 h-1 bg-white mb-1 transition-all bg-defaultColor opacity-0"></div>
+        <div className="w-6 h-1 bg-white mb-1 transition-transform bg-defaultColor -rotate-45 top-3"></div>
+      </div>
        <div className="flex flex-col w-52">
           {
             menuList && menuList?.map((section,indx)=> (
@@ -81,7 +98,7 @@ const MbHeaderMenu = () => {
 const Header = () => {
   const { deviceType, activeResize} =  useResize();
   const location = useLocation()
-
+  const visualMbMenu = useSelector(state => state.common.visualMbMenu);
   const [mobileYn, setMobileYn] = useState(false);
 
   useEffect(() => {
@@ -110,12 +127,12 @@ const Header = () => {
   }
   return (
     <>
-    <div className="h-20 w-full flex justify-between items-center mainnav my-3">
+    <div className={`h-20 w-full flex justify-between items-center mainnav my-3 ${mobileYn ? 'shadow-sm' : ''}`}>
       <div className="md:pl-10 pl-5 md:w-1/5 w-36 text-center">
         <img src={logoImg} alt="로고" className="h-12"/>
       </div>
     {
-       deviceType === 'MOBILE' ?  <MbHeader mobileYn={mobileYn} setMobileYn={setMobileYn}/> : 
+       deviceType === 'MOBILE' ?  <MbHeader /> : 
        <ul className="w-4/5 flex md:mt-0 mt-5 items-center relative text-center h-auto real font-semibold">
       {
         titleMenu?.map(item => (
@@ -127,7 +144,7 @@ const Header = () => {
       
     </div>
     {
-      deviceType === 'MOBILE' && mobileYn ?  <MbHeaderMenu menuList={menuList} />: 
+      deviceType === 'MOBILE' && visualMbMenu ?  <MbHeaderMenu menuList={menuList} />: 
       <>
       <div className='menu_background bg-defaultColor'></div>
       <div className="sub absolute w-4/5 h-56 z-50 top-24 right-0 min-[320px]:left-8 min-[560px]:left-10">
