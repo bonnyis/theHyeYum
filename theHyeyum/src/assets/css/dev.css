@@ -84,3 +84,19 @@ html {
   top: 5px;
   left: 130px;
 }
+.max-1200 {
+  height: 1200px;
+}
+.max-800 {
+  height: 600px;
+}
+.swiper-slide {
+  opacity: 0.4;
+}
+.swiper-slide-thumb-active {
+  opacity: 1;
+}
+.swiper-slide-thumb-active img {
+  border: 3px solid #556b2f;
+  border-radius: 10px;
+}

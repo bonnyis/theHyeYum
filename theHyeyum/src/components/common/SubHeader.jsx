@@ -23,6 +23,10 @@ const SubHeader = () => {
             return setTitle('')
         }
     }
+    // const checkMainTitle = () => {
+    //     const mainTitleList = ['기업소개', '제품소개', '연구개발', '커뮤니티'];
+        
+    // }
     useEffect(() => {
         typeCheckTitle()
     }, [pathname])

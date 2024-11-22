@@ -9,14 +9,18 @@ import DirectionMap from  "@/views/infomation/DirectionMap.jsx"
 import Greetings from  "@/views/infomation/Greetings.jsx"
 import History from  "@/views/infomation/History.jsx"
 import NotFound from "@/views/NotFound.jsx"
+import { useLocation } from "react-router-dom"
 const DefaultLayout = () => {
-
+  const {pathname} = useLocation();
   return (
     <div className="bg-defaultColor">
     <div className="w-screen md:w-auto mx-auto font-Interop max-w-screen-xl font-normal relative ">
       <Header />
         <section className="px-9 min-h-lvh">
-        <SubHeader />
+          {/*  main에선 서브헤더 안보이게 설정 */}
+          {
+              pathname !== '/'  ?<SubHeader /> :''
+          }
         <Outlet />
         </section>
  
