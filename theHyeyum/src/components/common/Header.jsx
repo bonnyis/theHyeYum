@@ -95,7 +95,9 @@ const Header = () => {
     <>
     <div className={`h-20 w-full flex justify-between items-center mainnav mb-3 ${isMobile ? 'shadow-sm' : ''}`}>
       <div className="md:pl-10 pl-5 md:w-1/5 w-36 text-center">
-        <img src={logoImg} alt="로고" className="h-12"/>
+      <Link to={'/'}>
+        <img src={logoImg} alt="더혜윰" className="h-12"/>
+        </Link>
       </div>
     {
        deviceType === 'MOBILE' ?  <MbHeader /> : 

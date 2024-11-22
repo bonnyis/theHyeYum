@@ -7,6 +7,7 @@ const SubHeader = () => {
     const [mainTitle, setMainTitle] = useState('')
     
     const typeCheckTitle = () => {
+        checkMainTitle()
         switch (pathname) {
             case '/notice':
                 return setTitle('공지사항')
@@ -23,10 +24,12 @@ const SubHeader = () => {
             return setTitle('')
         }
     }
-    // const checkMainTitle = () => {
-    //     const mainTitleList = ['기업소개', '제품소개', '연구개발', '커뮤니티'];
+    const checkMainTitle = () => {
+        if(pathname === 'info' || pathname === '/greetings'|| pathname ==='/history'|| pathname === '/direction') {
+            setMainTitle('기업소개') 
+        }
         
-    // }
+    }
     useEffect(() => {
         typeCheckTitle()
     }, [pathname])
