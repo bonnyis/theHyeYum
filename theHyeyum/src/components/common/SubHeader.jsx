@@ -16,17 +16,20 @@ const SubHeader = () => {
             case '/greetings':
                 return setTitle('CEO 인사말')
             case '/history':
-                setMainTitle('기업소개')
                 return setTitle('연혁')
             case '/direction':
                 return setTitle('오시는 길')
+            case '/question':
+                return setTitle('제품견적문의')
             default:
             return setTitle('')
         }
     }
     const checkMainTitle = () => {
-        if(pathname === 'info' || pathname === '/greetings'|| pathname ==='/history'|| pathname === '/direction') {
-            setMainTitle('기업소개') 
+        if(pathname === '/info' || pathname === '/greetings'|| pathname ==='/history'|| pathname === '/direction') {
+             setMainTitle('기업소개') 
+        } else if(pathname === '/question'|| pathname === '/notice') {
+             setMainTitle('커뮤니티')
         }
         
     }
