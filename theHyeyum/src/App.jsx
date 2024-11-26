@@ -10,10 +10,18 @@ import Greetings from  "@/views/infomation/Greetings.jsx"
 import History from  "@/views/infomation/History.jsx"
 import NotFound from "@/views/NotFound.jsx"
 import { useLocation } from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux';
+import { setVisualPcMenu } from "@/store/common/thunkFunctions"
+
 const DefaultLayout = () => {
   const {pathname} = useLocation();
+  const dispatch = useDispatch();
+  const pcMenu = useSelector((state)=> state.common.visualPcMenu)
+  const outsideMenu = () => {
+    return dispatch(setVisualPcMenu(!pcMenu))
+  }
   return (
-    <div className="bg-defaultColor">
+    <div className="bg-defaultColor" onClick={() => outsideMenu()}>
     <div className="w-screen md:w-auto mx-auto font-Interop max-w-screen-xl font-normal relative ">
       <Header />
         <section className="px-9 min-h-lvh">
