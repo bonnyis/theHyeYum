@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import useResize from '@/utils/useResize.js'
 import { useSelector, useDispatch } from 'react-redux';
-import {setVisualMbMenu } from "@/store/common/thunkFunctions"
+import {setVisualMbMenu, setVisualPcMenu } from "@/store/common/thunkFunctions"
 import menuList from '@/utils/menuList'
 // 모바일용 헤더 
 const MbHeader = () => {
@@ -14,6 +14,7 @@ const MbHeader = () => {
   const setViewMbMenu = () => {
     dispatch(setVisualMbMenu(!visualMbMenu))
   }
+
   return(
     <div id="menu-icon" className="block cursor-pointer w-14" onClick={()=> setViewMbMenu(!visualMbMenu)}>
       <div className="w-6 h-1 bg-white mb-1 transition-transform bg-logoColor"></div>
@@ -66,7 +67,10 @@ const Header = () => {
   const { deviceType, activeResize, isMobile} =  useResize();
   const location = useLocation()
   const visualMbMenu = useSelector(state => state.common.visualMbMenu);
-
+  const visualPcMenu = useSelector(state => state.common.visualPcMenu);
+  const setViewPcMenu = (val) => {
+    dispatch(setVisualPcMenu(val))
+  }
   useEffect(() => {
     activeResize();
   }, [window.innerWidth])
@@ -74,7 +78,7 @@ const Header = () => {
     // 페이지 전환 시 메뉴바 닫기
     if(deviceType === 'MOBILE') {
       dispatch(setVisualMbMenu(false))
-    }
+    } else return setViewPcMenu(false)
   }, [location])
   
   const titleMenu = [
@@ -84,13 +88,6 @@ const Header = () => {
     {main: 'community', name: '커뮤니티'},
   ]
 
-  const changemob = () => {
-    dispatch(setVisualMbMenu(false))
-    const target = document.querySelector('.sub');
-    if(target && target?.classList) {
-      target.classList.forEach(list => list.includes('block') ?   target.classList.remove('block') : target.classList.add('block'))
-    }
-  }
   return (
     <>
     <div className={`h-20 w-full flex justify-between items-center mainnav mb-3 ${isMobile ? 'shadow-sm' : ''}`}>
@@ -101,22 +98,21 @@ const Header = () => {
       </div>
     {
        deviceType === 'MOBILE' ?  <MbHeader /> : 
-       <ul className="w-4/5 flex md:mt-0 mt-5 items-center relative text-center h-auto real font-semibold">
+       <ul className="w-4/5 flex md:mt-0 mt-5 items-center relative text-center h-auto real font-semibold cursor-pointer">
       {
         titleMenu?.map(item => (
-          <li key={item.main} onClick={()=> changemob()} className={'w-1/4'}>{item.name}</li>
+          <li key={item.main} onClick={()=> setViewPcMenu(!visualPcMenu)} className={'w-1/4'}>{item.name}</li>
         ))
       }
       </ul>
     }
-      
     </div>
     {
       isMobile && visualMbMenu ?  <MbHeaderMenu />: 
-      <>
-      <div className='menu_background bg-defaultColor'></div>
-      <div className="sub absolute w-4/5 h-56 z-50 top-24 right-0 min-[320px]:left-8 min-[560px]:left-10">
-        <div className="subnav flex">
+      <div className={`${visualPcMenu ? 'block': 'none'}`}>
+        <div className={`bg-logoColor h-56 absolute top-20 w-screen left-79 z-50`}></div>
+        <div className={`sub absolute w-4/5 h-56 z-50 top-20 right-0 ${visualPcMenu ? 'block': 'none'}`}>
+        <div className="subnav flex rounded-b-md" style={{color: '#fff'}}>
           {
             menuList?.map((section,indx)=> (
               <ul key={`menu + ${indx +1}`}>
@@ -130,7 +126,7 @@ const Header = () => {
           }
           </div>
         </div>
-        </>
+      </div>
     }
       </>
 

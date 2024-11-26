@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { setVisualMbMenu } from './thunkFunctions'
+import { setVisualMbMenu,setVisualPcMenu } from './thunkFunctions'
 
 const initialState = {
     visualMbMenu: false,
+    visualPcMenu: false,
 
 }
 
@@ -13,6 +14,9 @@ const common = createSlice({
     extraReducers: (builder) => {
         builder.addCase(setVisualMbMenu.fulfilled, (state, {payload}) => {
             state.visualMbMenu = payload;
+        }),
+        builder.addCase(setVisualPcMenu.fulfilled, (state, {payload}) => {
+            state.visualPcMenu = payload;
         })
     }
 })

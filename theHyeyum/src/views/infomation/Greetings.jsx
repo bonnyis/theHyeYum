@@ -3,7 +3,6 @@ import {} from 'react'
 const Greetings = () => {
   return (
     <div className="font-medium greetings">
-
       <ul className="p-10">
         <li>안녕하십니까?</li>
         <li>(주) 더혜윰은 업소용 가구를 개발, 제작하는 전문업체로 사회와 더불어 함께하는 경영을 실현하고, 그 책임과 노력을 다하고 있습니다.</li>
