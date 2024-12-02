@@ -7,7 +7,7 @@ import useResize from '@/utils/useResize.js'
 import { useSelector, useDispatch } from 'react-redux';
 import {setVisualMbMenu, setVisualPcMenu } from "@/store/common/thunkFunctions"
 import menuList from '@/utils/menuList'
-// 모바일용 헤더 
+// 모바일용 어아콘
 const MbHeader = () => {
   const dispatch = useDispatch();
   const visualMbMenu = useSelector(state => state.common.visualMbMenu);
@@ -31,6 +31,7 @@ const MbHeaderMenu = () => {
   const setViewMbMenu = () => {
     dispatch(setVisualMbMenu(!visualMbMenu))
   }
+  //TODO:left-79조정필요 
   return(
     <div className={`bg-logoColor text-defaultColor absolute right-0 top-0 h-full p-5 rounded-l-lg z-50`}>
       <div className="flex flex-col items-end mr-2 mt-2" onClick={()=> setViewMbMenu(!visualMbMenu)}>
@@ -39,16 +40,16 @@ const MbHeaderMenu = () => {
         <div className={"w-6 h-1 bg-white mb-1 opacity-0 bg-defaultColor right-0"}></div>
         <div className="w-6 h-1  mb-1 transition-all  bg-defaultColor -rotate-45 -translate-y-2 right-0"></div>
       </div>
-       <div className="flex flex-col w-52">
+       <div className="flex flex-col w-52 p-5">
           {
             menuList && menuList?.map((section,indx)=> (
               <ul key={`menu + ${indx +1}`}>
                 <li className="hover:animate-color">
-                 <span  className="font-bold"> {section.mainName}</span>
+                 <p className="font-bold border-b-2 border-b-gray"> {section.mainName}</p>
                 <ul className="ml-5 my-2">
                 {
                   section.list?.map(link => (
-                    <li key={link.path}><Link to={link.path}>{link.name}</Link></li>
+                    <li key={link.path} className="py-2"><Link to={link.path}>{link.name}</Link></li>
                   ))
                 }
               </ul>
@@ -87,10 +88,12 @@ const Header = () => {
     {main: 'designLab', name: '연구개발'},
     {main: 'community', name: '커뮤니티'},
   ]
-
+  const outside = (e) => {
+    console.log(e)
+  }
   return (
     <>
-    <div className={`h-20 w-full flex justify-between items-center mainnav mb-3 ${isMobile ? 'shadow-sm' : ''}`}>
+    <div className={`h-20 w-full flex justify-between items-center mainnav mb-3 ${isMobile ? 'shadow-sm' : ''}`} onClick={(e)=> outside(e)}>
       <div className="md:pl-10 pl-5 md:w-1/5 w-36 text-center">
       <Link to={'/'}>
         <img src={logoImg} alt="더혜윰" className="h-12"/>
@@ -110,7 +113,7 @@ const Header = () => {
     {
       isMobile && visualMbMenu ?  <MbHeaderMenu />: 
       <div className={`${visualPcMenu ? 'block': 'none'}`}>
-        <div className={`bg-logoColor h-56 absolute top-20 w-screen left-79 z-50`}></div>
+        <div className={`bg-logoColor h-56 absolute top-20 w-screen lg:left-0 left-79 z-50`}></div>
         <div className={`sub absolute w-4/5 h-56 z-50 top-20 right-0 ${visualPcMenu ? 'block': 'none'}`}>
         <div className="subnav flex rounded-b-md" style={{color: '#fff'}}>
           {

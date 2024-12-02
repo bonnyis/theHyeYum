@@ -9,20 +9,22 @@ import DirectionMap from  "@/views/infomation/DirectionMap.jsx"
 import Greetings from  "@/views/infomation/Greetings.jsx"
 import History from  "@/views/infomation/History.jsx"
 import NotFound from "@/views/NotFound.jsx"
+import QnaPage from '@/views/community/QnaPage.jsx'
 import { useLocation } from "react-router-dom"
-import { useSelector, useDispatch } from 'react-redux';
-import { setVisualPcMenu } from "@/store/common/thunkFunctions"
+// import { useDispatch } from 'react-redux';
+// import { setVisualPcMenu } from "@/store/common/thunkFunctions"
 
 const DefaultLayout = () => {
   const {pathname} = useLocation();
-  const dispatch = useDispatch();
-  const pcMenu = useSelector((state)=> state.common.visualPcMenu)
-  const outsideMenu = () => {
-    return dispatch(setVisualPcMenu(!pcMenu))
+  // const dispatch = useDispatch();
+  //TODO 외부 클릭 시 메뉴바 닫히도록 
+  //TODO 메뉴바 숨김 보임처리시 애니메이션 처리로 부드럽게 조정
+  const outsideMenu = (e) => {
+    console.log(e)
   }
   return (
-    <div className="bg-defaultColor" onClick={() => outsideMenu()}>
-    <div className="w-screen md:w-auto mx-auto font-Interop max-w-screen-xl font-normal relative ">
+    <div className="bg-defaultColor" >
+    <div className="w-screen md:w-auto mx-auto font-Interop max-w-screen-xl font-normal relative" onClick={(event) => outsideMenu(event)}>
       <Header />
         <section className="px-9 min-h-lvh">
           {/*  main에선 서브헤더 안보이게 설정 */}
@@ -51,6 +53,7 @@ const App = () => {
         <Route path="/direction" element={<DirectionMap />} /> 
         {/* 커뮤니티 */}
         <Route path='/notice' element={<NoticeList />}/>
+        <Route path='/question' element={<QnaPage />}/>
         <Route path={"*"} element={<NotFound />}/>
       </Route>
 
