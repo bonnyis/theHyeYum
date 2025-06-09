@@ -13,6 +13,33 @@ export default {
     extend: {
       fontFamily: {
         Interop: ["Interop"]
+      },
+       screens: {
+        'custom': '1200px',
+      },
+      keyframes: {
+        fadeIn:{
+          'from': {
+            height: '0px',
+            opacity: 0,
+            // transform: 'translateY(7px)'
+          },
+          'to': {
+            height: '100%',
+            // transform: 'translateY(-100px)',
+            opacity: 1
+          }
+        },
+        fadeOut: {
+          '0%': {
+            opacity: 1,
+          },
+          '100%': {
+            // transform: 'translateY(-100px)',
+            opacity: 0,
+            transform: "translateY(-10px)",
+          }
+        }
       }
     },
   },

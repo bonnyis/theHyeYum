@@ -4,7 +4,7 @@ const Footer = () => {
     <footer className="border-t border-t-logoColor bg-logoColor">
       <div className="max-w-screen-xl mx-auto">
         <div className="flex text-gray py-9">
-           <div className="md:w-2/5 w-full flex justify-center">
+           <div className="lg:w-2/5 w-1/4 flex justify-center">
               <img src={footerLogo} alt="blackLogo" className="w-32 opacity-50" />
             </div>
             <div className="">

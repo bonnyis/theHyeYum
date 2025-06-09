@@ -3,8 +3,8 @@ export const menuList = [
       mainPath: 'info',
       list: [
         {name: 'CEO 인사말', path: '/greetings'},
-        {name: '기업소개', path: '/info'},
-        {name: '연혁', path: '/history'},
+        {name: '회사소개 및 연혁', path: '/info'},
+        // {name: '연혁', path: '/history'},
         {name: '오시는길', path: '/direction'},
       ]
     },

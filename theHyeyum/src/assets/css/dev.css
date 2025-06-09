@@ -1,6 +1,9 @@
 html {
   background-color: #f8f9fa;
 }
+#root {
+ font-size: 16px; 
+}
 .sub {
   display: none;
 }
@@ -10,7 +13,7 @@ html {
 }
 .subnav > ul {
   text-align: center;
-  width: 25%;
+  /* width: 25%; */
 }
 .subnav > ul li > a:hover {
   text-decoration: underline #d7ccc8 2.5px;
@@ -102,4 +105,52 @@ html {
 }
 .left-79 {
   left: -329px;
+}
+
+.w-1200 {
+  width: 1200px;
+}
+.left-30 {
+  left: 31.3%;
+}
+.menu2 > li > a {
+  color: #fff;
+  font-weight: 400;
+}
+.leading {
+  line-height: 4rem;
+}
+.menu-item{
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  color: black; /* 텍스트 색상 */
+  text-decoration: none; /* 밑줄 제거 */
+  /* padding-bottom: 4px; 선이랑 약간 거리 주기 */
+}
+.menu-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px; /* 선 두께 */
+  background-color: #ff6600; /* 포인트 컬러 */
+  transition: width 0.3s ease; /* 부드러운 애니메이션 */
+}
+
+.menu-item:hover::after {
+  width: 100%; /* hover 시 선이 가득 차도록 */
+}
+.menu2, .bg-div {
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu2.show, .bg-div.show {
+  transform: scaleY(1);
+}
+.height-20 {
+  height: 220px;
 }

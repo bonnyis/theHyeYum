@@ -12,7 +12,7 @@ const SubHeader = () => {
             case '/notice':
                 return setTitle('공지사항')
             case '/info':
-                return setTitle('기업소개')
+                return setTitle('회사소개 및 연혁')
             case '/greetings':
                 return setTitle('CEO 인사말')
             case '/history':
@@ -43,8 +43,8 @@ const SubHeader = () => {
     <>  
         { 
             pathname ? 
-            <div className="h-12">
-                <div className="flex justify-between py-4">
+            <div className="h-20">
+                <div className="flex justify-between py-8">
                 <h2 className="font-semibold text-2xl "> {title} </h2>
          
 

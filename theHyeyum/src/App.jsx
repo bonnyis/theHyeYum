@@ -24,9 +24,9 @@ const DefaultLayout = () => {
   }
   return (
     <div className="bg-defaultColor" >
-    <div className="w-screen md:w-auto mx-auto font-Interop max-w-screen-xl font-normal relative" onClick={(event) => outsideMenu(event)}>
+    <div className="w-screen font-Interop font-normal relative" onClick={(event) => outsideMenu(event)}>
       <Header />
-        <section className="px-9 min-h-lvh">
+        <section className="max-w-screen-xl mx-auto px-9 min-h-lvh">
           {/*  main에선 서브헤더 안보이게 설정 */}
           {
               pathname !== '/'  ?<SubHeader /> :''
