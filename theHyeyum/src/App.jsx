@@ -11,6 +11,7 @@ import History from  "@/views/infomation/History.jsx"
 import NotFound from "@/views/NotFound.jsx"
 import QnaPage from '@/views/community/QnaPage.jsx'
 import { useLocation } from "react-router-dom"
+import Main from './views/home/Main'
 // import { useDispatch } from 'react-redux';
 // import { setVisualPcMenu } from "@/store/common/thunkFunctions"
 
@@ -26,13 +27,14 @@ const DefaultLayout = () => {
     <div className="bg-defaultColor" >
     <div className="w-screen font-Interop font-normal relative" onClick={(event) => outsideMenu(event)}>
       <Header />
-        <section className="max-w-screen-xl mx-auto px-9 min-h-lvh">
-          {/*  main에선 서브헤더 안보이게 설정 */}
-          {
-              pathname !== '/'  ?<SubHeader /> :''
-          }
-        <Outlet />
-        </section>
+        {
+          pathname === '/' ? <Main /> :
+            <section className="max-w-screen-xl mx-auto px-9 min-h-lvh">
+              <SubHeader />
+              <Outlet />
+            </section>
+        }
+      
  
   </div>
   <Footer />
