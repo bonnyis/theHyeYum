@@ -48,11 +48,11 @@ html {
 }
 .swiper-button-prev,
 .swiper-button-next {
-  color: #556b2f !important;
+  color: #001e3e !important;
 }
 .swiper-button-prev::before,
 .swiper-button-next::after {
-  border-color: #556b2f !important;
+  border-color: #001e3e !important;
 }
 .history-grid {
   position: relative;
@@ -66,7 +66,7 @@ html {
 .history-grid .year::after {
   position: absolute;
   content: "";
-  border: 6px solid #556b2f;
+  border: 6px solid #001e3e;
   background: #fff;
   width: 5px;
   height: 5px;
@@ -100,7 +100,7 @@ html {
   opacity: 1;
 }
 .swiper-slide-thumb-active img {
-  border: 3px solid #556b2f;
+  border: 3px solid #001e3e;
   border-radius: 10px;
 }
 .left-79 {

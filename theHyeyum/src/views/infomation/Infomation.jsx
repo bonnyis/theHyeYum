@@ -32,7 +32,7 @@ const CompanyInfo = () => {
           앞으로도 혁신적인 디자인과 친환경 소재를 통해 국내외 가구 시장을 선도하는 기업이 되고자 합니다.
         </p>
         {/* 간단한 연혁 요약 */}
-        <div className="border-l-4 border-blue-600 pl-6 space-y-4 border-serveColor">
+        <div className="border-l-4 border-blue-600 pl-6 space-y-4 border-logoColor">
           <div>
             <p className="font-semibold text-blue-600 mb-2">2024년</p>
             <div className="text-lg">벤처기업 인증 (제 2024 0207030017호)</div>
